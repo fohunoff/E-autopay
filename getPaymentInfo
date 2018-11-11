@@ -1,0 +1,55 @@
+var Months = [
+	'января',
+	'февраля',
+	'марта',
+	'апреля',
+	'мая',
+	'июня',
+	'июля',
+	'августа',
+	'сентября',
+	'октября',
+	'ноября',
+	'декабря'
+];
+
+var date = new Date();
+var currentDate = date.getDate() + ' ' + Months[date.getMonth()];
+
+
+/* */
+var container = document.querySelector('.container');
+var parthners = container.querySelectorAll('.e-partner-id-');
+
+var table = document.createElement('table');
+var title = document.createElement('h1');
+
+title.textContent = currentDate;
+container.appendChild(title);
+
+/* Замыкание */
+var getPayInfo = function (elem) {
+	var payInfo = elem.querySelector('.partners_number_account').textContent;
+	var splitInfo = payInfo.trim().split(',');
+	// console.log(splitInfo);
+
+	var tr = document.createElement('tr');
+
+	splitInfo.map(function (string) {
+		var td = document.createElement('td');
+		td.textContent = string;
+		td.style.padding = '20px';
+		td.style.border = '1px solid gray';
+		tr.appendChild(td);
+	});
+
+	table.appendChild(tr);
+};
+
+for(var i = 0; i < parthners.length; i++) {
+	var partner = parthners[i];
+	getPayInfo(partner);
+};
+
+/* вывод таблицы */
+container.appendChild(table);
