@@ -19,7 +19,7 @@ var currentDate = date.getDate() + ' ' + Months[date.getMonth()];
 
 /* */
 var container = document.querySelector('.container');
-var parthners = container.querySelectorAll('.e-partner-id-');
+var parthners = [...container.querySelectorAll('.e-partner-id-')];
 
 var table = document.createElement('table');
 var title = document.createElement('h1');
@@ -28,16 +28,16 @@ title.textContent = currentDate;
 container.appendChild(title);
 
 /* Замыкание */
-var getPayInfo = function (elem) {
+var getPayInfo = (elem) => {
 	var payInfo = elem.querySelector('.partners_number_account').textContent;
 	var splitInfo = payInfo.trim().split(',');
 	// console.log(splitInfo);
 
 	var tr = document.createElement('tr');
 
-	splitInfo.map(function (string) {
+	splitInfo.map((string) => {
 		var td = document.createElement('td');
-		td.textContent = string;
+		td.textContent = string.replace(/\D/g, '');
 		td.style.padding = '20px';
 		td.style.border = '1px solid gray';
 		tr.appendChild(td);
@@ -46,10 +46,6 @@ var getPayInfo = function (elem) {
 	table.appendChild(tr);
 };
 
-for(var i = 0; i < parthners.length; i++) {
-	var partner = parthners[i];
-	getPayInfo(partner);
-};
+parthners.map(partner => getPayInfo(partner));
 
 /* вывод таблицы */
-container.appendChild(table);
