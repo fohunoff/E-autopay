@@ -1,21 +1,20 @@
 var Months = [
-	'января',
-	'февраля',
-	'марта',
-	'апреля',
-	'мая',
-	'июня',
-	'июля',
-	'августа',
-	'сентября',
-	'октября',
-	'ноября',
-	'декабря'
+    'января',
+    'февраля',
+    'марта',
+    'апреля',
+    'мая',
+    'июня',
+    'июля',
+    'августа',
+    'сентября',
+    'октября',
+    'ноября',
+    'декабря'
 ];
 
 var date = new Date();
 var currentDate = date.getDate() + ' ' + Months[date.getMonth()];
-
 
 /* */
 var container = document.querySelector('.container');
@@ -29,21 +28,22 @@ container.appendChild(title);
 
 /* Замыкание */
 var getPayInfo = (elem) => {
-	var payInfo = elem.querySelector('.partners_number_account').textContent;
-	var splitInfo = payInfo.trim().split(',');
-	// console.log(splitInfo);
+    var payInfo = elem.querySelector('.partners_number_account').textContent;
+    var splitInfo = payInfo.trim().split(',');
+    console.log(splitInfo);
 
-	var tr = document.createElement('tr');
+    var tr = document.createElement('tr');
 
-	splitInfo.map((string) => {
-		var td = document.createElement('td');
-		td.textContent = string.replace(/\D/g, '');
-		td.style.padding = '20px';
-		td.style.border = '1px solid gray';
-		tr.appendChild(td);
-	});
+    splitInfo.map((string) => {
+        var td = document.createElement('td');
+        td.textContent = string.replace(/\D/g, '');
+        td.style.padding = '20px 60px';
+        td.style.border = '1px solid gray';
+        tr.appendChild(td);
+    });
 
-	table.appendChild(tr);
+    table.appendChild(tr);
+    container.appendChild(table);
 };
 
 parthners.map(partner => getPayInfo(partner));
